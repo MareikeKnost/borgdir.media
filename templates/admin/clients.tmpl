@@ -1,0 +1,84 @@
+{{define "title"}}borgDir.media-clients{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="../index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/admin/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/admin/clients" class="nav-link">Kunden</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<div class="col-md-2 text-right">
+			<a href="/profil">{{.Name}}</a></br>
+			<small>Admin</small>
+		</div>
+		<img src="../{{.Image}}" alt ="Adam Admin" class="col-md-1">
+	</header>
+
+	<main class="admin-clients">
+		<h1 class="">Kunden</h1>
+
+
+<div class="form-group col-md-4">
+	<label class="text-right col-md-12 pr-4" for="exampleFormControlSelect1">Kategorie</label>
+	<div class="input-group">
+		<input type="text" class="form-control" placeholder="Suche" aria-describedby="inputGroupPrepend2" required>
+		<select class="card text-white bg-secondary btn btn-outline dropdown-toggle form-control" id="exampleFormControlSelect1">
+			<option selected>Alle</option>
+			<option>Kameras</option>
+			<option>Objektive</option>
+			<option>Blitzgeräte</option>
+			<option>Stative</option>
+		</select>
+	</div>
+</div>
+
+
+		<div class="row border-bottom">
+			<div class="col-md-4">Kunde</div>
+			<div class="col-md-4">Ausgeliehenes Equipment</div>
+			<div class="col-md-2">Status</div>
+			<div class="col-md-2">Bearbeiten</div>
+		</div>
+<ul class="pl-0 pt-2">
+	{{range .Clients}}
+		<li class="row pt-3">
+			<div class="col-md-4">
+				<div class="row">
+				<div class="col-md-3 pr-0">
+					<img src="../../{{.Image}}" alt="{{.Name}}" class="border border-primary rounded-circle img-fluid">
+				</div>
+				<div class="col-md-9">
+				<p class="lead">{{.Name}}</p><p>ID:{{.ID}}<br>
+					<small>{{.Role}}</small>
+				</p>
+				</div>
+			</div>
+			</div>
+
+			<ul class="list-unstyled col-md-4">
+				<br>
+				{{range .Borrowed}}
+				<li>{{.Name}} (Inv.-Nr.:{{.ID}})</li>
+				{{end}}
+			</ul>
+			<div class="col-md-2">
+				<p>{{.Status}}<br>
+					{{ if eq .Status "aktiv"}}
+						bis {{.ActiveUntil}}
+					{{ end }}
+			</p>
+
+			</div>
+			<div class="col-md-2 text-center">
+				<a href="/admin/edit-client?ID={{.ID}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+			</div>
+		</li>
+		{{end}}
+	</ul>
+	</main>
+</div><!--Container-->
+{{end}}

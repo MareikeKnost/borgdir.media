@@ -1,0 +1,71 @@
+{{define "title"}}borgDir.media-edit-client{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="../index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/admin/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/admin/clients" class="nav-link">Kunden</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<div class="col-md-2 text-right">
+			<a href="/profil">Adam Admin</a><br>
+			<small>Admin</small>
+		</div>
+		<img src="../static/images/profilbild.jpg" alt ="Adam Admin" class="col-md-1">
+	</header>
+
+	<main class="profil">
+		<h1 class="mb-4">Profil bearbeiten</h1>
+		<form action="/admin/edit-client-button?ID={{.ID}}" method="POST" enctype=multipart/form-data>
+				<p>Kunden-ID: {{.ID}} | Status: {{.Status}}</p>
+		<div class="row">
+			<div class="col-md-6">
+
+				<fieldset class="mb-3">
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Benutzername</label>
+    			<input type="text" class="form-control" name="name" value="{{.Name}}">
+  			</div>
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Email Addresse</label>
+    			<input type="email" class="form-control" placeholder="Email Addresse" value="{{.Email}}">
+  			</div>
+			</fieldset>
+			<fieldset>
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Neues Passwort</label>
+    			<input type="password" class="form-control" name="password" value="{{.Password}}">
+  			</div>
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Altes Passwort</label>
+    			<input type="password" class="form-control" value="{{.Password}}">
+  			</div>
+			</fieldset>
+			<button class="btn btn-primary" type="submit" >Änderungen speichern</button>
+			{{if eq .Status "aktiv"}}
+			<a class="float-right btn btn-danger" href="/admin/lock-client?ID={{.ID}}"><i class="fas fa-lock"></i> Konto sperren</a>
+			{{else}}
+			<a class="float-right btn btn-success" href="/admin/unlock-client?ID={{.ID}}"><i class="fas fa-unlock"></i> Konto entsperren</a>
+			{{end}}
+			</div>
+
+		<div class="col-md-6 justify-content text-center">
+			<img src="../static/images/profilbild.jpg" alt="Profilbild" class="border border-primary rounded-circle img-fluid">
+			<div class="input-group mt-4">
+  			<div class="custom-file">
+    			<input type="file" class="custom-file-input" id="inputGroupFile04">
+    			<label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+  			</div>
+  			<div class="input-group-append">
+    			<button class="btn btn-outline-primary" type="button">Upload</button>
+  			</div>
+			</div>
+		</div>
+	</form>
+	</main>
+</div><!--Container-->
+{{end}}

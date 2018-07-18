@@ -1,0 +1,50 @@
+.navbar .navbar-brand, h1{
+    font-weight:700;
+    color:#007bff;
+}
+.navbar a{
+    color:#212529;
+}
+.carousel{
+    padding: 3rem 7rem 2rem 7rem;
+}
+.carousel-control-next {
+    color:#212529;
+    opacity: .5;
+}
+.carousel-control-prev {
+    color:#212529;
+    opacity: .5;
+}
+ .carousel-control-next:hover, .carousel-control-prev:hover{
+    color:#212529;
+}
+.carousel-control-next:focus,.carousel-control-prev:focus{
+    opacity: .8;
+    color:#212529;
+}
+.form-group{
+    text-align:left;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+label{
+  font-size:0.8rem;
+}
+
+/*img.col-md-1{
+  padding-left:0;
+  padding-right:0;
+  margin-left:15px;
+  margin-right:15px;
+}*/
+
+footer{
+
+}

@@ -1,0 +1,99 @@
+{{define "title"}}borgDir.media-Equipment{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/my-equipment" class="nav-link">Meine Geräte</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+		<div class="col-md-2 text-right">
+			<a href="/profil?Name={{.Name}}">{{.Name}}</a><br>
+			{{if eq .Role "client"}}
+			<small>Benutzer</small>
+			{{else if eq .Role "admin"}}
+			<small>Admin</small>
+			{{else}}
+			<small>Gast</small>
+			{{end}}
+		</div>
+		<img src="{{.Image}}" alt="{{.Name}}" class="col-md-1">
+	</header>
+
+	<main class="equipment">
+		<div class="row">
+			<h1 class="col-md-6">Equipment</h1>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label class="text-right col-md-12 pr-4" for="Category">Kategorie</label>
+					<div class="input-group">
+						<input id="Search" oninput="updateQueryStringParam('Search', this.value);" type="text" class="form-control" placeholder="Suche" aria-describedby="inputGroupPrepend2">
+						<select onchange="updateQueryStringParam('Category', this.value);" class="card text-white bg-secondary btn  btn-outline dropdown-toggle form-control" id="Category">
+							<option selected>Alle</option>
+							<option value="Kameras">Kameras</option>
+							<option value="Objektive">Objektive</option>
+							<option value="Blitzgeräte">Blitzgeräte</option>
+							<option value="Stative">Stative</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+    			<label for="exampleFormControlSelect1">Sortieren nach</label>
+						<select onchange="updateQueryStringParam('SortBy', this.value);" class=" form-control" id="exampleFormControlSelect1">
+      				<option selected>Auswälen...</option>
+      				<option value="status">Verfügbarkeit</option>
+				      <option value="ID">Inventar-Nummer</option>
+				      <option value="name">Bezeichnung</option>
+    				</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			{{range .EquipmentListe}}
+			<div class="col-md-6">
+				<section class="card px-4 py-3 my-2">
+					<header class=""><h2>{{.Name}}</h2></header>
+					<div class="row">
+						<div class="col-md-7">
+						<small>{{.Category}}</small>
+						<p>{{.Description}}</p>
+						<p><b>Inhalt:</b> {{.Content}}</p>
+						</div>
+						<div class="col-md-5 mb-3">
+						<img src="{{.Image}}" alt="{{.Name}}" class="img-fluid">
+						</div>
+					</div>
+					<footer class="">
+						{{ if eq .Status "verfügbar"}}
+							<a href="/add-to-cart?ID={{.ID}}" class="btn btn-primary">hinzufügen</a>
+							<span class="text-success float-right pr-2"><i class="far fa-check-circle"></i> noch {{.Quantity}} verfügbar</span>
+						{{ else }}
+							<a href="/reserve?ID={{.ID}}" class="btn btn-secondary">vormerken</a>
+							<span class="text-danger float-right pr-2"><i class="fas fa-minus-circle"></i> nicht verfügbar</span>
+						{{ end }}
+
+						{{if eq .Borrowed 1}}
+							<span class="text-success pr-2">Ausgeliehen</span>
+						{{ end }}
+						{{if eq .Reserved 1}}
+							<span class="text-success pr-2">Reserviert</span>
+						{{ end }}
+
+
+
+					</footer>
+				</section>
+			</div>
+			{{end}}
+		</div>
+	</main>
+</div><!--Container-->
+{{end}}

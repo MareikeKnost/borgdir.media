@@ -1,0 +1,97 @@
+{{define "title"}}borgDir.media-Add{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="../index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/admin/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/admin/clients" class="nav-link">Kunden</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<div class="col-md-2 text-right">
+			<a href="/profil">Adam Admin</a><br>
+			<small>Admin</small>
+		</div>
+		<img src="../static/images/profilbild.jpg" alt ="Adam Admin" class="col-md-1">
+	</header>
+
+	<main class="admin-add">
+		<h1 class="">Equipment hinzufügen</h1>
+		<form action="/add-equipment" method="POST" enctype=multipart/form-data>
+		<div class="row">
+
+		<div class="col-md-8 row">
+			<fieldset class="col-md-8">
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Bezeichnung</label>
+					<input type="text" class="form-control" name="name" placeholder="Bezeichnung" required>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Inventar-Nummer</label>
+					<input type="text" name="ID" class="form-control" placeholder="Inventar-Nummer wird automatisch generiert">
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Inhalt</label>
+					<input type="text" name="content" class="form-control" placeholder="Inhalt" required>
+				</div>
+			</fieldset>
+			<fieldset class="col-md-4">
+				<div class="form-group">
+					<label class="text-right col-md-12 pr-4" for="exampleFormControlSelect1">Kategorie</label>
+					<div class="input-group">
+						<select name="category" class="form-control">
+							<option>Kameras</option>
+							<option>Objektive</option>
+							<option>Blitzgeräte</option>
+							<option>Stative</option>
+							<option>Sonstiges</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="text-right col-md-12 pr-4" for="exampleFormControlSelect1">Lagerort</label>
+					<div class="input-group">
+						<input type="text" name="location" class="form-control" placeholder="Lagerort" aria-describedby="inputGroupPrepend2" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="text-right col-md-12 pr-4" for="exampleFormControlSelect1">Anzahl</label>
+						<select name="quantity" class="custom-select">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+				</div>
+
+			</fieldset>
+			<div class="form-group col-md-12">
+				<label for="beschreibung">Beschreibung</label>
+			<textarea type="text" name="description" class=" form-control" id="beschreibung" aria-label="Beschreibung"></textarea>
+			</div>
+		</div>
+
+		<div class="col-md-4 justify-content text-center">
+				<img src="../static/images/platzhalter.jpg" alt="Platzhalter" class="border border-primary img-fluid">
+				<div class="input-group mt-4">
+	  			<div class="custom-file">
+	    			<input type="file" name ="file" class="custom-file-input" id="inputGroupFile04">
+	    			<label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+	  			</div>
+	  			<div class="input-group-append">
+	    			<button class="btn btn-outline-primary" type="button">Upload</button>
+	  			</div>
+				</div>
+		</div>
+
+		</div>
+		<button type="submit" class="btn btn-primary">Speichern</button>
+		</form>
+	</main>
+</div><!--Container-->
+{{end}}

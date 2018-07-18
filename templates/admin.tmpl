@@ -1,0 +1,37 @@
+{{define "title"}}borgDir.media-Admin{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="admin/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="admin/clients" class="nav-link">Kunden</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+		<div class="col-md-2 text-right">
+			<a href="/profil?Name={{.Name}}">{{.Name}}</a></br>
+			<small>Admin</small>
+		</div>
+			<img src="{{.Image}}" alt="{{.Name}}" class="col-md-1">
+	</header>
+
+	<main class="admin">
+		<h1 class=" my-5 text-center">Administrationsbereich</h1>
+		<div class="row justify-content-center">
+
+		<div class="col-md-3 text-center">
+		<i class="fas col-md-12 fa-7x mb-3 fa-clipboard-list"></i>
+		<a class="btn btn-primary" href="admin/equipment">Equipment-Verwaltung</a>
+	</div>
+	<div class="col-md-3 text-center">
+		<i class="col-md-12 fas mb-3 fa-7x fa-users"></i>
+		<a  class="btn btn-primary" href="admin/clients">Kunden-Verwaltung</a>
+	</div>
+		</div>
+	</main>
+</div><!--Container-->
+{{end}}

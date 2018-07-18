@@ -1,0 +1,79 @@
+{{define "title"}}borgDir.media-Profil{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/my-equipment" class="nav-link">Meine Geräte</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+		<div class="col-md-2 text-right">
+			<a href="profil">{{.Name}}</a><br>
+			{{if eq .Role "client"}}
+			<small>Benutzer</small>
+			{{else if eq .Role "admin"}}
+			<small>Admin</small>
+			{{else}}
+			<small>Gast</small>
+			{{end}}
+		</div>
+		<img src="{{.Image}}" alt="{{.Name}}" class="col-md-1">
+	</header>
+
+	<main class="profil">
+		<h1 class="mb-4">Profil</h1>
+	<form action="/edit-client-button?ID={{.ID}}" method="POST" enctype=multipart/form-data>
+				<p>Kunden-ID: {{.ID}} | Status: {{.Status}}</p>
+		<div class="row">
+			<div class="col-md-6">
+
+				<fieldset class="mb-5">
+					<div class="form-group">
+	    			<label for="exampleFormControlInput1">Benutzername</label>
+	    			<input type="text" class="form-control" name="name" value="{{.Name}}">
+	  			</div>
+					<div class="form-group">
+	    			<label for="exampleFormControlInput1">Email Addresse</label>
+	    			<input type="email" name="email" class="form-control" placeholder="Email Addresse" value="{{.Email}}">
+	  			</div>
+			</fieldset>
+			<fieldset>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Altes Passwort</label>
+					<input type="text" class="form-control" name="oldPassword" placeholder="Altes Passwort">
+				</div>
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Neues Passwort</label>
+    			<input type="text" class="form-control" name="newPassword" placeholder="Neues Passwort">
+  			</div>
+				<div class="form-group">
+    			<label for="exampleFormControlInput1">Neues Passwort</label>
+    			<input type="text" class="form-control" placeholder="Neues Passwort">
+  			</div>
+			</fieldset>
+				<button class="btn btn-primary" type="submit" >Änderungen speichern</button>
+			<a class="float-right btn btn-danger" href="/delete-client?ID={{.ID}}"><i class="fas fa-trash-alt"></i> Konto löschen</a>
+			</div>
+
+		<div class="col-md-6 justify-content text-center">
+			<img src="../{{.Image}}" alt="Profilbild_{{.Name}}" class="border border-primary rounded-circle img-fluid">
+
+			<div class="input-group mt-4">
+  			<div class="custom-file">
+    			<input type="file" name="file" value="{{.Image}}" class="custom-file-input" id="inputGroupFile04">
+    			<label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+  			</div>
+  			<div class="input-group-append">
+    			<button class="btn btn-outline-primary" type="submit">Upload</button>
+  			</div>
+			</div>
+		</div>
+	</form>
+	</main>
+</div><!--Container-->
+{{end}}

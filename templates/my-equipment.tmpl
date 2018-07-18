@@ -1,0 +1,88 @@
+{{define "title"}}borgDir.media-Meine Geräte{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="index">borgdir.media</a>
+		<nav class="col-lg-6">
+			<ul class="nav">
+				<li class="nav-item"><a href="/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/my-equipment" class="nav-link">Meine Geräte</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+		<div class="col-md-2 text-right">
+			<a href="/profil?Name={{.Name}}">{{.Name}}</a>
+			{{ if .Role}}
+			<br><small>Admin</small>
+			{{ else }}
+			<br><small>Benutzer</small>
+			{{ end }}
+		</div>
+		<img src="{{.Image}}" class="col-md-1">
+	</header>
+
+	<main class="my-equipment">
+		<h1>Meine Geräte</h1>
+
+		<h2 class="pt-3">Entliehen</h2>
+		<div class="row border-bottom">
+			<div class="col-md-4">Equipment</div>
+			<div class="col-md-3">Beschreibung</div>
+			<div class="col-md-2">Entliehen am</div>
+			<div class="col-md-2">Rückgabe bis</div>
+			<div class="col-md-1">Verlängern</div>
+		</div>
+<ul class="pl-0 pt-2">
+		{{range .Entliehen}}
+		<li class="row pt-3">
+			<div class="col-md-4">
+				<div class="row">
+				<div class="col-md-3 pr-0">
+					<img src="{{.Image}}" alt="{{.Name}}" class="img-fluid">
+				</div>
+				<div class="col-md-9">
+				<p class="lead">{{.Name}}</p><p>Inv.-Nr. {{.ID}}</p>
+				</div>
+			</div>
+			</div>
+
+			<div class="col-md-3">{{.Description}}</div>
+			<div class="col-md-2"><date><i class="fas fa-box-open"></i> {{.BorrowedOn}}</date></div>
+			<div class="col-md-2"><date><i class="far fa-calendar-alt"></i> {{.ReturnUntil}}</date></div>
+			<div class="col-md-1 text-center"><a href="/extend?ID={{.ID}}" class="btn btn-primary"><i class="far fa-lg fa-calendar-plus"></i></a></div>
+		</li>
+		{{end}}
+	</ul>
+
+	<h2 class="pt-3">Vorgemerkt</h2>
+	<div class="row border-bottom">
+		<div class="col-md-4">Equipment</div>
+		<div class="col-md-4">Beschreibung</div>
+		<div class="col-md-3">Rückgabe vorraussichtlich</div>
+		<div class="col-md-1">Löschen</div>
+	</div>
+<ul class="pl-0 pt-2">
+	{{range .Vorgemerkt}}
+	<li class="row pt-3">
+		<div class="col-md-4">
+			<div class="row">
+			<div class="col-md-3 pr-0">
+				<img src="{{.Image}}" alt="{{.Name}}" class="img-fluid">
+			</div>
+			<div class="col-md-9">
+			<p class="lead">{{.Name}}</p><p>Inv.-Nr. {{.ID}}</p>
+			</div>
+		</div>
+		</div>
+
+		<div class="col-md-4">{{.Description}}</div>
+		<div class="col-md-3"><date><i class="far fa-calendar-alt"></i> {{.ReturnUntil}}</date></div>
+		<div class="col-md-1 text-center"><a href="/deleteReserved?ID={{.ID}}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a></div>
+	</li>
+ {{end}}
+</ul>
+	</main>
+</div><!--Container-->
+{{end}}

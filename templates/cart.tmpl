@@ -1,0 +1,75 @@
+{{define "title"}}borgDir.media-Warenkorb{{end}}
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="/index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/my-equipment" class="nav-link">Meine Geräte</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			</ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+		<div class="col-md-2 text-right">
+			<a href="/profil?Name={{.Name}}">{{.Name}}</a><br>
+			{{if eq .Role "client"}}
+			<small>Benutzer</small>
+			{{else if eq .Role "admin"}}
+			<small>Admin</small>
+			{{else}}
+			<small>Gast</small>
+			{{end}}
+		</div>
+		<img src="{{.Image}}" alt="{{.Name}}" class="col-md-1">
+	</header>
+
+	<main class="cart">
+		<h1 class="col-md-6">Ausleihkorb</h1>
+
+		<div class="row border-bottom">
+			<div class="col-md-4">Equipment</div>
+			<div class="col-md-4">Beschreibung</div>
+			<div class="col-md-1">Anzahl</div>
+			<div class="col-md-2">Rückgabe bis</div>
+			<div class="col-md-1">Löschen</div>
+		</div>
+
+	<ul class="pl-0 pt-2">
+		{{range .Warenkorb}}
+		<li class="row pt-3">
+						<div class="col-md-4">
+							<div class="row">
+							<div class="col-md-3 pr-0">
+								<img src="{{.Image}}" alt="{{.Name}}" class="img-fluid">
+							</div>
+							<div class="col-md-9">
+							<p class="lead">{{.Name}}</p>
+							<p>Inv-Nr.:{{.ID}}</p>
+							</div>
+						</div>
+						</div>
+
+						<div class="col-md-4">{{.Description}}</div>
+						<div class="col-md-1">
+						<form action="/cart-quantity" method="POST">
+							<select name="quantity{{.ID}}" class="custom-select" onChange=selectChange(this.value)>
+								<option selected> {{ if .Quantity }} {{.Quantity}} {{ else }} - {{end}} </option>
+								{{ if ge .MaxQuantity 1 }} <option>1</option>{{end}}
+								{{ if ge .MaxQuantity 2 }} <option>2</option>{{end}}
+								{{ if ge .MaxQuantity 3 }} <option>3</option>{{end}}
+								{{ if ge .MaxQuantity 4 }} <option>4</option>{{end}}
+								{{ if ge .MaxQuantity 5 }}<option>5</option>{{end}}
+							</select></div>
+						</form>
+						<div class="col-md-2"><date><i class="far fa-calendar-alt"></i> {{.Date}}</date></div>
+						<div class="col-md-1 text-center"><a href="/deleteFromCart?ID={{.ID}}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a></div>
+				</li>
+		{{end}}
+
+	</ul>
+		<a href="/borrow" class="float-right btn btn-primary">Jetzt ausleihen</a>
+	</main>
+
+</div><!--Container-->
+{{end}}

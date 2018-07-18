@@ -1,0 +1,83 @@
+{{define "title"}}borgDir.media-admin-equipment{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="../index">borgdir.media</a>
+		<nav class="col-lg-7">
+			<ul class="nav">
+				<li class="nav-item"><a href="/admin/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/admin/clients" class="nav-link">Kunden</a></li>
+				<li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+			<ul>
+		</nav>
+		<div class="col-md-2 text-right">
+			<a href="/profil?Name={{.Name}}">{{.Name}}</a></br>
+			<small>Admin</small>
+		</div>
+		<img src="../{{.Image}}" alt="{{.Name}}" alt ="Adam Admin" class="col-md-1">
+	</header>
+
+	<main class="admin-equipment">
+		<h1 class="">Equipment verwalten</h1>
+		<div class="form-row align-items-center pb-4">
+<a href="add" class="btn btn-primary mr-5 mt-2"><i class="fas fa-plus fa-lg"></i></a>
+<div class="form-group ml-5">
+	<label class="text-right col-md-12 pr-4" for="Category">Kategorie</label>
+	<div class="input-group">
+		<input id="Search" oninput="updateQueryStringParam('Search', this.value);" type="text" class="form-control" placeholder="Suche" aria-describedby="inputGroupPrepend2">
+		<select onchange="updateQueryStringParam('Category', this.value);" class="card text-white bg-secondary btn  btn-outline dropdown-toggle form-control" id="Category">
+			<option selected>Alle</option>
+			<option value="Kameras">Kameras</option>
+			<option value="Objektive">Objektive</option>
+			<option value="Blitzgeräte">Blitzgeräte</option>
+			<option value="Stative">Stative</option>
+		</select>
+	</div>
+</div>
+</div>
+
+		<div class="row border-bottom">
+			<div class="col-md-3">Equipment</div>
+			<div class="col-md-3">Beschreibung</div>
+			<div class="col-md-2">Status</div>
+			<div class="col-md-2">Rückgabe bis</div>
+			<div class="col-md-2">Bearbeiten/Löschen</div>
+		</div>
+<ul class="pl-0 pt-2">
+	{{range .Equipment}}
+		<li class="row pt-3">
+			<div class="col-md-3">
+				<div class="row">
+				<div class="col-md-3 pr-0">
+					<img src="../{{.Image}}" alt="{{.Name}}" class="img-fluid">
+				</div>
+				<div class="col-md-9">
+				<p class="lead">{{.Name}}</p><p>Inv.-Nr. {{.ID}}</br>Lagerort: {{.Location}}</p>
+				</div>
+			</div>
+			</div>
+
+			<div class="col-md-3">{{.Description}}</div>
+			<div class="col-md-2">
+				{{if eq .Status "nicht verfügbar"}}
+				<span class="text-danger pr-2"><i class="fas fa-flag-checkered"></i> nicht verfügbar</span>
+				{{else}}
+			<span class="text-success pr-2"><i class="far fa-check-circle"></i> verfügbar</span>
+				{{ end }}</br>
+			</div>
+			<div class="col-md-2">
+				{{.ReturnUntil}}
+			</div>
+			<div class="col-md-2 text-center">
+				<div>
+				<a href="/admin/edit?ID={{.ID}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+				<a href="/admin/delete-equipment?ID={{.ID}}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
+				</div>
+			</div>
+		</li>
+{{end}}
+	</ul>
+	</main>
+</div><!--Container-->
+{{end}}

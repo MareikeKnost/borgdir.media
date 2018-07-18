@@ -1,0 +1,33 @@
+{{define "title"}}borgDir.media-Login{{end}}
+
+{{define "body"}}
+<div class="container">
+	<header class="row navbar mb-4">
+		<a class="navbar-brand" href="index">borgdir.media</a>
+		<nav class="col-lg-8">
+			<ul class="nav">
+				<li class="nav-item"><a href="/equipment" class="nav-link">Equipment</a></li>
+				<li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+			<ul>
+		</nav>
+		<a href="cart"> <i class="fas fa-shopping-cart fa-lg pt-2"></i></a>
+	</header>
+
+	<main class="justify-content pt-4">
+  	    <div class="text-center ">
+              <h1>Login</h1>
+              <form class="form-signin" action="/loggingIn" method="POST">
+              	<div class="form-group">
+                	<label for="InputName">Benutzername</label>
+                  <input type="text" class="form-control mb-4" id="InputName" aria-describedby="nameHelp" name="name" placeholder="Bitte Benutzernamen eingeben" required>
+								</div>
+                	<div class="form-group">
+										<label for="InputPassword1">Passwort</label>
+                    <input type="password" class="form-control" name="password" placeholder="Bitte Passwort eingeben" required>
+                  </div>
+									<button type="submit" class="btn btn-primary ">Login</button>
+							</form>
+		</div>
+	</main>
+</div><!--Container-->
+{{end}}
