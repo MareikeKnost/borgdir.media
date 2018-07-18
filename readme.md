@@ -4,7 +4,7 @@ A simple web-based App to borrow photo equipment.
 
 This application was build during Summer Semester 2018 in subject web programming with Mr. Luigi Lo Iacono at Th Köln.
 
-## Full access
+## Full acces
   * (User) Benutzername: Heidi Hungrig Passwort: pw
   * (User) Benutzername: Timo Test Passwort: pw
   * (Admin) Benutzername: Adam Admin Passwort: passwort
